@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Posters — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+
+<!-- CSS KHAS UNTUK GALERI POSTER & POPUP -->
+<style>
+  /* --- REKA BENTUK HERO --- */
+  .page-hero {
+    max-width: 1000px;
+    margin: 6rem auto 3rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .page-hero .eyebrow {
+    color: #00ffcc;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+  }
+
+  .page-hero p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    color: #b0b0c0;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* --- REKA BENTUK GALERI POSTER --- */
+  .gallery-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Susun ke tengah sebab ada 2 je */
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 450px; /* Hadkan saiz supaya tak terlalu besar */
+    aspect-ratio: 3 / 4; /* Bentuk menegak (Potret) khas untuk Poster */
+    background-color: #14141e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.8);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-10px);
+    border-color: #00ffcc;
+    box-shadow: 0 15px 40px rgba(0, 255, 204, 0.2);
+    z-index: 5;
+  }
+
+  .gallery-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Guna contain supaya poster tidak terpotong */
+    object-fit: contain; 
+    object-position: center;
+    transition: filter 0.4s ease, transform 0.4s ease;
+    cursor: pointer; /* Tunjuk kursor jari bila hover */
+    padding: 1rem; /* Tambah sedikit ruang kelegaan */
+  }
+  
+  .gallery-item:hover img {
+    filter: brightness(1.15);
+    transform: scale(1.05); /* Efek zoom in perlahan bila hover */
+  }
+
+  /* --- BUTANG KEMBALI --- */
+  .back-nav {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  
+  .back-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(0, 255, 204, 0.05);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .back-btn:hover {
+    background: #00ffcc;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+    font-weight: 700;
+  }
+
+  /* --- MODAL POPUP (LIGHTBOX) --- */
+  .modal {
+    display: none; 
+    position: fixed;
+    z-index: 999;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal.show {
+    display: block;
+    opacity: 1;
+  }
+
+  .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(0, 255, 204, 0.2);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    object-fit: contain;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #00ffcc;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  .modal-content {
+    animation-name: zoom;
+    animation-duration: 0.4s;
+  }
+
+  @keyframes zoom {
+    from {transform:scale(0.8); opacity:0}
+    to {transform:scale(1); opacity:1}
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo">IPANG INC BUDAK PENYUUU<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/about.html">About me</a></li>
+      <li><a href="/achievements.html">Achievements</a></li>
+      <li class="nav-item">
+        <a href="/artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="/artwork-design.html" class="active">Artwork</a>
+          <a href="/artwork-3d-modelling.html">Modelling</a>
+          <a href="/artwork-games-development.html">Games</a>
+          <a href="/artwork-ui.html">UI Reimagined</a>
+          <a href="/artwork-video-creation.html">Video Creation</a>
+        </div>
+      </li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+
+<div class="page-hero">
+  <span class="eyebrow">Digital Artwork</span>
+  <h1>Posters</h1>
+  <p>Graphic design work featuring game promotional posters, custom typography elements, and infographics..</p>
+</div>
+
+<!-- KOTAK MODAL UNTUK POPUP GAMBAR -->
+<div id="imageModal" class="modal">
+  <span class="close" id="closeModal">&times;</span>
+  <img class="modal-content" id="popupImage" alt="Popup Poster">
+</div>
+
+<section class="section">
+  
+  <!-- GALERI GAMBAR POSTER (2 ITEM SAHAJA DITENGAH) -->
+  <div class="gallery-flex">
+
+    <!-- Poster 1 -->
+    <div class="gallery-item">
+      <!-- Menggunakan nama poster yang awak pernah berikan sebelum ini -->
+      <img src="/image/Artwork/DigitalArtwork/Posters/NEW POSTER AW 2.png" alt="Poster Astralis War 1" class="clickable-image">
+    </div>
+
+    <!-- Poster 2 -->
+    <div class="gallery-item">
+      <!-- Sila gantikan "poster-2.png" dengan nama fail poster awak yang kedua -->
+      <img src="/image/Artwork/DigitalArtwork/Posters/NEW POSTER AW.png" alt="Poster 2" class="clickable-image">
+    </div>
+
+        <div class="gallery-item">
+      <!-- Sila gantikan "poster-2.png" dengan nama fail poster awak yang kedua -->
+      <img src="/image/Artwork/DigitalArtwork/Posters/Infographic Poster Assignment 1.png" alt="Poster 2" class="clickable-image">
+    </div>
+
+        <div class="gallery-item">
+      <!-- Sila gantikan "poster-2.png" dengan nama fail poster awak yang kedua -->
+      <img src="/image/Artwork/DigitalArtwork/Posters/final happy.png" alt="Poster 2" class="clickable-image">
+    </div>
+
+        <div class="gallery-item">
+      <!-- Sila gantikan "poster-2.png" dengan nama fail poster awak yang kedua -->
+      <img src="/image/Artwork/DigitalArtwork/Posters/final creepy.png" alt="Poster 2" class="clickable-image">
+    </div>
+
+  </div>
+
+  <!-- BUTANG KEMBALI KE MENU ARTWORK -->
+  <div class="back-nav">
+    <a href="/artwork-design.html" class="back-btn">← Kembali Ke Kategori</a>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <div class="socials">
+      <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+      <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>
+      <a href="[Pautan ArtStation]" aria-label="ArtStation" target="_blank" rel="noopener">AS</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Script untuk Navigation Mobile
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+      }
+    });
+  });
+
+  // Script untuk Modal Popup Gambar
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("popupImage");
+  const closeBtn = document.getElementById("closeModal");
+  
+  // Dapatkan semua gambar yang mempunyai class 'clickable-image'
+  const images = document.querySelectorAll(".clickable-image");
+
+  images.forEach(img => {
+    img.addEventListener("click", function(){
+      modal.classList.add("show");
+      modalImg.src = this.src; // Masukkan sumber gambar yang ditekan ke dalam popup
+    });
+  });
+
+  // Fungsi tutup popup bila tekan butang X
+  closeBtn.addEventListener("click", function() {
+    modal.classList.remove("show");
+  });
+
+  // Fungsi tutup popup bila tekan kawasan luar gambar
+  window.addEventListener("click", function(event) {
+    if (event.target == modal) {
+      modal.classList.remove("show");
+    }
+  });
+</script>
+
+</body>
+</html>

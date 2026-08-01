@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me — Muhammad Irfan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- CSS KHAS UNTUK PAGE ABOUT ME YANG LEBIH MODEN -->
+<style>
+  /* --- REKA BENTUK HERO (ADA TEMPAT GAMBAR PROFIL) --- */
+  .about-hero-container {
+    max-width: 1200px;
+    margin: 6rem auto 3rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .about-hero-text {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .eyebrow {
+    color: #00ffcc; /* Warna Accent Cyan */
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .about-hero-text h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+  }
+
+  .about-hero-text h4 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #b0b0c0;
+    font-weight: 400;
+  }
+
+  /* KOTAK GAMBAR PROFIL AWAK */
+  .about-hero-image {
+    flex: 0 1 400px;
+    position: relative;
+  }
+
+  .profile-pic {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 2px solid rgba(0, 255, 204, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+    transition: transform 0.3s ease;
+  }
+
+  .profile-pic:hover {
+    transform: translateY(-10px);
+    border-color: #00ffcc;
+  }
+
+  /* --- REKA BENTUK TIMELINE PENDIDIKAN (YANG DIBETULKAN LEBAR) --- */
+  .about-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: block; /* Pastikan ia bukan grid 2 kolum lagi */
+  }
+  
+  .timeline-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .timeline-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+    letter-spacing: 1px;
+  }
+
+  /* Garis panjang di sebelah kiri */
+  .timeline {
+    position: relative;
+    padding-left: 3.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #00ffcc, rgba(0, 255, 204, 0.1), transparent);
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.6);
+  }
+
+  /* Kotak Pendidikan (Melintang / Lebar) */
+  .timeline-item {
+    position: relative;
+    margin-bottom: 4rem;
+    background: linear-gradient(145deg, #11161d, #0b0f14);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #212a35;
+    display: flex; /* Jadikan Teks dan Gambar sebelah-sebelah */
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.4s ease;
+  }
+
+  .timeline-item:hover {
+    transform: translateY(-5px);
+    border-color: #00ffcc;
+    box-shadow: 0 15px 40px rgba(0, 255, 204, 0.15);
+  }
+
+  /* Bulatan pada timeline (Animasi Hover) */
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3.95rem; /* Selaraskan dengan garis */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background: #0b0f14;
+    border: 3px solid #00ffcc;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00ffcc;
+    z-index: 2;
+    transition: all 0.4s ease;
+  }
+
+  .timeline-item:hover::before {
+    background: #00ffcc;
+    transform: translateY(-50%) scale(1.3);
+  }
+
+  /* Teks dalam kad */
+  .timeline-text {
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .meta-wrap {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .timeline-item .meta {
+    font-family: 'Orbitron', sans-serif;
+    background: rgba(0, 255, 204, 0.1);
+    color: #00ffcc;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    border: 1px solid rgba(0, 255, 204, 0.3);
+  }
+  
+  .timeline-item .cgpa {
+    font-family: 'Rajdhani', sans-serif;
+    background: rgba(139, 123, 255, 0.15);
+    color: #b8afff;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(139, 123, 255, 0.4);
+  }
+
+  .timeline-item h4 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .timeline-item p {
+    color: #888899;
+    font-size: 1.1rem;
+    margin: 0;
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  /* Gambar (Fixed Size di Sebelah Kanan) */
+  .timeline-image {
+    flex: 0 0 260px;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+  }
+  
+  .timeline-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .timeline-item:hover .timeline-image img {
+    transform: scale(1.1);
+  }
+
+  /* RESPONSIVE UNTUK PHONE */
+  @media (max-width: 768px) {
+    .about-hero-container {
+      flex-direction: column-reverse;
+      text-align: center;
+    }
+    .about-hero-image {
+      flex: 0 1 250px;
+    }
+    .timeline {
+      padding-left: 2rem;
+    }
+    .timeline-item {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.5rem;
+      gap: 1.5rem;
+    }
+    .timeline-item::before {
+      left: -2.4rem;
+      top: 30px;
+      transform: none;
+    }
+    .timeline-item:hover::before {
+      transform: scale(1.3);
+    }
+    .timeline-image {
+      width: 100%;
+      height: 200px;
+      flex: auto;
+    }
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">IPANG INC BUDAK PENYUUU<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About me</a></li>
+      <li><a href="achievements.html">Achievements</a></li>
+      <li class="nav-item">
+        <a href="artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="artwork-design.html">Artwork</a>
+          <a href="artwork-3d-modelling.html">Modelling</a>
+          <a href="artwork-games-development.html">Games</a>
+          <a href="artwork-ui.html">UI Reimagined</a>
+          <a href="artwork-video-creation.html">Video Creation</a>
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+<!-- BAHAGIAN HERO PENGNALAN (TEKS + GAMBAR PROFIL) -->
+<div class="about-hero-container">
+  <div class="about-hero-text">
+    <span class="eyebrow">About Me</span>
+    <h1>Hello, allow me to introduce myself..</h1>
+    <h4>Welcome to my portfolio! I am Muhammad Irfan bin Baharuddin, an aspiring Game Designer and Digital Artist with a strong drive to bring virtual worlds to life. From conceptualizing characters to designing gameplay mechanics, I enjoy every step of the creative process. I am actively looking for a dynamic internship position where I can absorb knowledge from industry veterans, contribute my enthusiasm to the team, and level up my skills in a professional pipeline.</h4>
+  </div>
+  
+  <!-- TEMPAT LETAK GAMBAR AWAK -->
+  <div class="about-hero-image">
+    <!-- GANTIKAN 'gambar-irfan.jpg' DENGAN NAMA FAIL GAMBAR AWAK SEBENAR -->
+    <img src="/image/gambar-irfan.jpg" alt="Muhammad Irfan" class="profile-pic" onerror="this.src='https://placehold.co/400x400/14141e/00ffcc?text=Profile+Picture'">
+  </div>
+</div>
+
+<section class="section">
+  <!-- BAHAGIAN TIMELINE PENDIDIKAN YANG DIBETULKAN -->
+  <div class="about-grid">
+    
+    <div class="timeline-header">
+      <h2>Education Journey</h2>
+    </div>
+
+    <div class="timeline">
+      
+      <!-- PENDIDIKAN 1: DEGREE -->
+      <div class="timeline-item">
+        <div class="timeline-text">
+          <div class="meta-wrap">
+            <span class="meta">2023 – NOW</span>
+            <span class="cgpa">CGPA (Sem 5): 3.88</span>
+          </div>
+          <h4>Bachelor of Design (Digital Games) with Honours</h4>
+          <p>Universiti Pendidikan Sultan Idris (UPSI)<br>Tanjung Malim, Perak</p>
+        </div>
+        <div class="timeline-image">
+           <img src="/image/upsi.jpg" alt="UPSI Campus" onerror="this.src='https://placehold.co/300x200/14141e/00ffcc?text=UPSI'">
+        </div>
+      </div>
+
+      <!-- PENDIDIKAN 2: DIPLOMA -->
+      <div class="timeline-item">
+        <div class="timeline-text">
+          <div class="meta-wrap">
+            <span class="meta">2020 – 2022</span>
+            <span class="cgpa">CGPA: 3.72</span>
+          </div>
+          <h4>Diploma in Game Design and Development</h4>
+          <p>Universiti Pendidikan Sultan Idris (UPSI)<br>Tanjung Malim, Perak</p>
+        </div>
+        <div class="timeline-image">
+           <img src="/image/upsi.jpg" alt="UPSI Campus" onerror="this.src='https://placehold.co/300x200/14141e/00ffcc?text=UPSI'">
+        </div>
+      </div>
+
+      <!-- PENDIDIKAN 3: SEKOLAH MENENGAH -->
+      <div class="timeline-item">
+        <div class="timeline-text">
+          <div class="meta-wrap">
+            <span class="meta">2014 – 2018</span>
+            <span class="cgpa">SPM: 10A 1C</span>
+          </div>
+          <h4>Sekolah Menengah Kebangsaan Agama Kuala Abang</h4>
+          <p>Dungun, Terengganu</p>
+        </div>
+        <div class="timeline-image">
+           <img src="/image/smka kuala abang.jpg" alt="SMKA Kuala Abang" onerror="this.src='https://placehold.co/300x200/14141e/00ffcc?text=SMKA'">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <div class="socials">
+      <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+      <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>
+      <a href="[Pautan ArtStation]" aria-label="ArtStation" target="_blank" rel="noopener">AS</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

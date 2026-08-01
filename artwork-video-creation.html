@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Creation — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+
+<!-- CSS KHAS UNTUK GALERI VIDEO & DOKUMEN -->
+<style>
+  /* --- REKA BENTUK HERO --- */
+  .page-hero {
+    max-width: 1000px;
+    margin: 6rem auto 3rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .page-hero .eyebrow {
+    color: #00ffcc;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+  }
+
+  .page-hero p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    color: #b0b0c0;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+
+  /* --- REKA BENTUK BUTANG TABS --- */
+  .tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    padding: 12px 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+  }
+
+  .tab-btn:hover, .tab-btn.active {
+    background: #00ffcc;
+    color: #0a0a0f;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+    font-weight: 700;
+  }
+
+  /* --- KAWALAN SECTION (SEMBUNYI & MUNCUL) --- */
+  .tab-content {
+    display: none; 
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  .tab-content.active-content {
+    display: block; 
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- REKA BENTUK SECTION TITLE --- */
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #00ffcc;
+    text-align: center;
+    margin: 0 auto 2rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+  }
+
+  /* --- REKA BENTUK KAD DOKUMEN/PDF --- */
+  .port-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+  }
+
+  .port-card {
+    position: relative;
+    display: block; 
+    border-radius: 12px;
+    overflow: hidden;
+    background: #14141e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    aspect-ratio: 4 / 3;
+    cursor: pointer;
+    text-decoration: none; 
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  }
+
+  .port-card:hover {
+    transform: translateY(-8px);
+    border-color: #00ffcc;
+    box-shadow: 0 15px 30px rgba(0, 255, 204, 0.2);
+  }
+
+  .ph-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: top;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: brightness(0.7);
+    z-index: 1;
+  }
+
+  .port-card:hover .ph-img {
+    transform: scale(1.05);
+    filter: brightness(0.3);
+  }
+
+  .port-tagcat {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(220, 53, 69, 0.9);
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  }
+
+  .port-overlay {
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    width: 100%;
+    padding: 3rem 1.5rem 1.5rem;
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.6) 60%, transparent 100%);
+    z-index: 5;
+    transition: bottom 0.4s ease, opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .port-card:hover .port-overlay {
+    bottom: 0;
+  }
+
+  .port-overlay h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    line-height: 1.3;
+  }
+
+  .port-overlay p {
+    font-family: 'Rajdhani', sans-serif;
+    color: #00ffcc;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  /* --- VIDEO SHOWCASE (Untuk Short Story) --- */
+  .video-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+
+  .video-wrapper {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
+    border: 2px solid rgba(0, 255, 204, 0.4);
+  }
+
+  .video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-caption {
+    font-family: 'Rajdhani', sans-serif;
+    color: #b0b0c0;
+    text-align: center;
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo">Astralia<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/about.html">About me</a></li>
+      <li><a href="/achievements.html">Achievements</a></li>
+      <li class="nav-item">
+        <a href="/artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="/artwork-design.html">Artwork</a>
+          <a href="/artwork-3d-modelling.html">Modelling</a>
+          <a href="/artwork-games-development.html">Games</a>
+          <a href="/artwork-ui.html">UI Reimagined</a>
+          <a href="/artwork-video-creation.html" class="active">Video Creation</a>
+        </div>
+      </li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+
+<div class="page-hero">
+  <span class="eyebrow">Portfolio / Video</span>
+  <h1>Video Creation</h1>
+  <p>Koleksi dokumen pra-produksi, penulisan skrip, papan cerita (storyboard), dan penghasilan video animatik pendek.</p>
+</div>
+
+<!-- BUTANG KAWALAN TABS -->
+<div class="tab-container">
+  <button class="tab-btn active" onclick="switchTab('scriptwriting', this)">Scriptwriting & Storyboard</button>
+  <button class="tab-btn" onclick="switchTab('shortstory', this)">Trailers & Short Story</button>
+</div>
+
+<section class="section">
+  
+  <!-- BAHAGIAN 1: SCRIPTWRITING & STORYBOARD (Aktif Secara Default) -->
+  <div id="scriptwriting" class="tab-content active-content">
+    <p style="text-align:center; font-family:'Rajdhani', sans-serif; color:#b0b0c0; max-width:800px; margin:-2rem auto 3rem; padding:0 2rem;">
+      A showcase of scriptwriting and storyboarding work created for various creative projects.
+    </p>
+    <div class="port-grid">
+      
+      <!-- ITEM 1: Animatics Presentation -->
+      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/Animatics%20Presentation.pdf" target="_blank" class="port-card">
+        <span class="port-tagcat">Slide</span>
+        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/animatics-presentation.jpg" alt="Animatics Presentation" class="ph-img">
+        <div class="port-overlay">
+          <h4>Animatics Presentation: Attack on Cybercity</h4>
+          <p>Slaid pembentangan projek animatik.</p>
+        </div>
+      </a>
+
+      <!-- ITEM 2: Final Storyboard Attack on Cybercity -->
+      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/Final%20Storyboard%20Attack%20on%20CyberCity.pdf" target="_blank" class="port-card">
+        <span class="port-tagcat">PDF</span>
+        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/final-storyboard-cybercity.jpg" alt="Final Storyboard" class="ph-img">
+        <div class="port-overlay">
+          <h4>Final Storyboard: Attack on Cybercity</h4>
+          <p>Lakaran bingkai papan cerita akhir.</p>
+        </div>
+      </a>
+
+      <!-- ITEM 3: Script Video Kenangan -->
+      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/SCRIPT%20VIDEO.pdf" target="_blank" class="port-card">
+        <span class="port-tagcat">PDF</span>
+        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/script-video.jpg" alt="Script Video" class="ph-img">
+        <div class="port-overlay">
+          <h4>Script Video: Filem Pendek "Kenangan"</h4>
+          <p>Draf penulisan skrip penuh filem pendek.</p>
+        </div>
+      </a>
+
+      <!-- ITEM 4: Storyboard Kenangan -->
+      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/Storyboard%20Kenangan.pdf" target="_blank" class="port-card">
+        <span class="port-tagcat">Slide</span>
+        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/storyboard-kenangan.jpg" alt="Storyboard Kenangan" class="ph-img">
+        <div class="port-overlay">
+          <h4>Storyboard: "Kenangan"</h4>
+          <p>Pembentangan Narrative & Storytelling.</p>
+        </div>
+      </a>
+
+      <!-- ITEM 5: UI Elements in Education -->
+      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/UI%20Elements%20in%20Education%20Video%20Proposal.pdf" target="_blank" class="port-card">
+        <span class="port-tagcat">Slide</span>
+        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/ui-elements.jpg" alt="UI Elements" class="ph-img">
+        <div class="port-overlay">
+          <h4>UI Elements in Education</h4>
+          <p>Kajian/Pembentangan elemen antaramuka.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- BAHAGIAN 2: TRAILERS & SHORT STORY -->
+  <div id="shortstory" class="tab-content">
+    <p style="text-align:center; font-family:'Rajdhani', sans-serif; color:#b0b0c0; max-width:800px; margin:-2rem auto 3rem; padding:0 2rem;">
+      Finalized video productions brought to life from scripts and storyboards, featuring trailers and narrative short stories.
+    </p>
+
+    <div class="video-showcase">
+
+      <a href="https://www.youtube.com/watch?v=yOm7EI5skDo" target="_blank" rel="noopener" class="video-wrapper no-embed">
+      <img src="https://img.youtube.com/vi/yOm7EI5skDo/maxresdefault.jpg" alt="Astralis War Gameplay">
+      <div class="play-overlay">
+        <span class="play-btn">
+          ▶ Watch on YouTube
+        </span>
+      </div>
+    </a>
+  </div>
+
+      <!-- Video 2: UI Elements in Education -->
+      <div>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/suzf3q239jA" title="UI Elements in Education" allowfullscreen></iframe>
+        </div>
+        <p class="video-caption">UI Elements in Education</p>
+      </div>
+
+      <!-- Video 3: Attack on CyberCity Animatics -->
+      <div>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/NDbXONkCIIE" title="Attack on CyberCity Animatics" allowfullscreen></iframe>
+        </div>
+        <p class="video-caption">Attack on CyberCity Animatics</p>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <div class="socials">
+      <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+      <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>
+      <a href="[Pautan ArtStation]" aria-label="ArtStation" target="_blank" rel="noopener">AS</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Script untuk Navigation Mobile
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+      }
+    });
+  });
+
+  // Script untuk kawalan Tabs
+  function switchTab(tabId, clickedBtn) {
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => {
+      content.classList.remove('active-content');
+    });
+
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    document.getElementById(tabId).classList.add('active-content');
+    clickedBtn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

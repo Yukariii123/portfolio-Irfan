@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Games — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- CSS KHAS UNTUK GALERI GAMES DEVELOPMENT -->
+<style>
+  /* --- REKA BENTUK HERO --- */
+  .page-hero {
+    max-width: 1000px;
+    margin: 6rem auto 3rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .page-hero .eyebrow {
+    color: #00ffcc;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    color: #b0b0c0;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* --- REKA BENTUK GRID PORTFOLIO --- */
+  .port-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+  }
+
+  /* Reka Bentuk Kad (Ditukar supaya sesuai untuk tag <a>) */
+  .port-card {
+    position: relative;
+    display: block; /* Tambahan untuk tag <a> */
+    border-radius: 12px;
+    overflow: hidden;
+    background: #14141e;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    aspect-ratio: 4 / 3;
+    cursor: pointer;
+    text-decoration: none; /* Buang garisan bawah pada link */
+    transition: all 0.4s ease;
+  }
+
+  .port-card:hover {
+    transform: translateY(-8px);
+    border-color: #00ffcc;
+    box-shadow: 0 15px 30px rgba(0, 255, 204, 0.2);
+  }
+
+  /* Gambar */
+  .ph-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    z-index: 1;
+  }
+
+  .port-card:hover .ph-img {
+    transform: scale(1.08);
+    filter: brightness(0.3);
+  }
+
+  /* Tag/Kategori */
+  .port-tagcat {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    color: #00ffcc;
+    border: 1px solid #00ffcc;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 3; /* Naikkan z-index */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+  }
+
+  /* Overlay Teks */
+  .port-overlay {
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    width: 100%;
+    padding: 3rem 1.5rem 1.5rem;
+    background: linear-gradient(to top, rgba(10, 10, 15, 1) 0%, rgba(10, 10, 15, 0.9) 60%, transparent 100%);
+    z-index: 2;
+    transition: bottom 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .port-card:hover .port-overlay {
+    bottom: 0;
+    opacity: 1;
+  }
+
+  .port-overlay h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  .port-overlay p {
+    font-family: 'Rajdhani', sans-serif;
+    color: #b0b0c0;
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">IPANG INC BUDAK PENYUUU<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About me</a></li>
+      <li><a href="achievements.html">Achievements</a></li>
+      <li class="nav-item">
+        <a href="artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="artwork-design.html">Artwork</a>
+          <a href="artwork-3d-modelling.html">Modelling</a>
+          <a href="artwork-games-development.html" class="active">Games</a>
+          <a href="artwork-ui.html">UI Reimagined</a>
+          <a href="artwork-video-creation.html">Video Creation</a>
+          <!-- Boleh tambah Animation jika nak kekalkan -->
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+
+<div class="page-hero">
+  <span class="eyebrow">Portfolio / Games</span>
+  <h1>Games Development</h1>
+  <p>Koleksi projek Level Design, mekanik permainan, dan pembangunan game menggunakan Unity &amp; C#.</p>
+</div>
+
+<section class="section">
+  <div class="port-grid">
+    
+    <!-- KAD PROJEK 1: Astralis War -->
+    <a href="/game/astralis-war.html" class="port-card game">
+      <span class="port-tagcat">Strategy / Sci-Fi</span>
+      <img src="/image/Games/AstralisWar/1.png" alt="Astralis War" class="ph-img">
+      <div class="port-overlay">
+        <h4>Astralis War</h4>
+        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+      </div>
+    </a>
+    
+    <!-- KAD PROJEK 2: Attack On Cyber City -->
+    <a href="/game/attack-on-cyber-city.html" class="port-card game">
+      <span class="port-tagcat">Action / Cyberpunk</span>
+      <img src="/image/Games/AttackOnCyberCity/1.png" alt="Attack On Cyber City" class="ph-img">
+      <div class="port-overlay">
+        <h4>Attack On Cyber City</h4>
+        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+      </div>
+    </a>
+    
+    <!-- KAD PROJEK 3: Cheesy Escape -->
+    <a href="/game/cheesy-escape.html" class="port-card game">
+      <span class="port-tagcat">Puzzle / Platformer</span>
+      <img src="/image/Games/CheesyEscape/1.png" alt="Cheesy Escape" class="ph-img">
+      <div class="port-overlay">
+        <h4>Cheesy Escape</h4>
+        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+      </div>
+    </a>
+    
+    <!-- KAD PROJEK 4: Learn Your Food -->
+    <a href="/game/learn-your-food.html" class="port-card game">
+      <span class="port-tagcat">Educational / Casual</span>
+      <img src="/image/Games/LearnYourFood/1.png" alt="Learn Your Food" class="ph-img">
+      <div class="port-overlay">
+        <h4>Learn Your Food</h4>
+        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+      </div>
+    </a>
+
+    <!-- KAD PROJEK 5: Legend Of The Mines -->
+    <a href="/game/legend-of-the-mines.html" class="port-card game">
+      <span class="port-tagcat">Adventure / RPG</span>
+      <img src="image/Games/LegendOfTheMines/1.jpg" alt="Legend Of The Mines" class="ph-img">
+      <div class="port-overlay">
+        <h4>Legend Of The Mines</h4>
+        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+      </div>
+    </a>
+
+    <!-- KAD PROJEK 6: Space Crusader -->
+    <a href="/game/space-crusader.html" class="port-card game">
+      <span class="port-tagcat">Arcade / Shooter</span>
+      <img src="image/Games/SpaceCrusader/1.png" alt="Space Crusader" class="ph-img">
+      <div class="port-overlay">
+        <h4>Space Crusader</h4>
+        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <div class="socials">
+      <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+      <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>
+      <a href="[Pautan ArtStation]" aria-label="ArtStation" target="_blank" rel="noopener">AS</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

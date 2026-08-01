@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI Reimagined — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+  /* --- REKA BENTUK HERO --- */
+  .page-hero {
+    max-width: 1000px;
+    margin: 9rem auto 3rem; /* Dinaikkan margin-top supaya tak lindung menu */
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .page-hero .eyebrow {
+    color: #00ffcc;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+  }
+
+  .page-hero p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    color: #b0b0c0;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  /* --- REKA BENTUK BUTANG TABS --- */
+  .tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    padding: 12px 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+  }
+
+  .tab-btn:hover, .tab-btn.active {
+    background: #00ffcc;
+    color: #0a0a0f;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+    font-weight: 700;
+  }
+
+  /* --- KAWALAN SECTION (SEMBUNYI & MUNCUL) --- */
+  .tab-content {
+    display: none; 
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  .tab-content.active-content {
+    display: block; 
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- REKA BENTUK SECTION TITLE & DESCRIPTION (SUB-KATEGORI) --- */
+  .tab-description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+  }
+
+  .tab-description h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+  }
+
+  .tab-description p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.15rem;
+    color: #b0b0c0;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #00ffcc;
+    text-align: center;
+    margin: 2rem auto 2rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+  }
+
+  /* --- REKA BENTUK GALERI GAMBAR UI --- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9; 
+    background-color: #14141e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-8px);
+    border-color: #00ffcc;
+    box-shadow: 0 15px 30px rgba(0, 255, 204, 0.15);
+    z-index: 5;
+  }
+
+  .gallery-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    object-position: center;
+    transition: filter 0.4s ease, transform 0.4s ease;
+    padding: 1rem;
+  }
+  
+  .gallery-item:hover img {
+    filter: brightness(1.15);
+    transform: scale(1.05); 
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo">IPANG INC BUDAK PENYUUU<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/about.html">About me</a></li>
+      <li><a href="/achievements.html">Achievements</a></li>
+      <li class="nav-item">
+        <a href="/artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="/artwork-design.html">Artwork</a>
+          <a href="/artwork-3d-modelling.html">Modelling</a>
+          <a href="/artwork-games-development.html">Games</a>
+          <a href="/artwork-ui.html" class="active">UI Reimagined</a>
+          <a href="/artwork-video-creation.html">Video Creation</a>
+          <a href="/digital-animation.html">Animation</a>
+        </div>
+      </li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+
+<div class="page-hero">
+  <span class="eyebrow">Portfolio / UI Reimagined</span>
+  <h1>UI Reimagined</h1>
+  <p>Select a project below to view my user interface design concepts and redesign processes.</p>
+</div>
+
+<!-- BUTANG KAWALAN TABS -->
+<div class="tab-container">
+  <button class="tab-btn active" onclick="switchTab('plants', this)">Plant's Wrath</button>
+  <button class="tab-btn" onclick="switchTab('rajawali', this)">Rajawali</button>
+</div>
+
+<section class="section">
+  
+  <!-- BAHAGIAN 1: PLANTS' WRATH (Aktif Secara Default) -->
+  <div id="plants" class="tab-content active-content">
+    
+    <div class="tab-description">
+      <h2>Plant's Wrath</h2>
+      <p>A portfolio project exploring game adaptation and UI redesign. Plant's Wrath merges the beloved character design of Plants vs. Zombies with Angry Birds' sling-and-shoot mechanics into a fresh interface layout.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Plant_s Wrath/screenshots/1.png" alt="Plants Wrath UI 1" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=Plants+Wrath+UI+1'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Plant_s Wrath/screenshots/2.png" alt="Plants Wrath UI 2" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=Plants+Wrath+UI+2'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Plant_s Wrath/screenshots/3.png" alt="Plants Wrath UI 3" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=Plants+Wrath+UI+3'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Plant_s Wrath/screenshots/4.png" alt="Plants Wrath UI 4" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=Plants+Wrath+UI+4'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Plant_s Wrath/screenshots/5.png" alt="Plants Wrath UI 5" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=Plants+Wrath+UI+5'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Plant_s Wrath/screenshots/6.png" alt="Plants Wrath UI 6" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=Plants+Wrath+UI+6'">
+      </div>
+    </div>
+  </div>
+
+  <!-- BAHAGIAN 2: RAJAWALI (Tersembunyi Secara Default) -->
+  <div id="rajawali" class="tab-content">
+    
+    <div class="tab-description">
+      <h2>Rajawali</h2>
+      <p>A UI/UX overhaul for Rajawali, a 3D space shooter developed by my lecturer. This project focuses on restructuring the visual layout across the Main Menu, Settings, and Instructions panels.</p>
+    </div>
+
+    <!-- SUB-BAHAGIAN: ORIGINAL DESIGN -->
+    <h3 class="section-title">✦ Previous Design ✦</h3>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Rajawali/original/1.png" alt="Rajawali Original UI 1" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=Original+UI+1'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Rajawali/original/2 & 3.png" alt="Rajawali Original UI 2" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=Original+UI+2'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Rajawali/original/4.png" alt="Rajawali Original UI 3" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=Original+UI+3'">
+      </div>
+    </div>
+
+    <!-- SUB-BAHAGIAN: FINAL DESIGN -->
+    <h3 class="section-title">✦ New Design ✦</h3>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Rajawali/final/1.png" alt="Rajawali Final UI 1" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=New+UI+1'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Rajawali/final/2.png" alt="Rajawali Final UI 2" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=New+UI+2'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Rajawali/final/3.png" alt="Rajawali Final UI 3" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=New+UI+3'">
+      </div>
+      <div class="gallery-item">
+        <img src="/image/UI Reimage/Rajawali/final/4.png" alt="Rajawali Final UI 4" onerror="this.src='https://placehold.co/800x450/14141e/00ffcc?text=New+UI+4'">
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <div class="socials">
+      <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+      <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>
+      <a href="[Pautan ArtStation]" aria-label="ArtStation" target="_blank" rel="noopener">AS</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Script untuk Navigation Mobile
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+      }
+    });
+  });
+
+  // Script untuk kawalan Tabs (Plants Wrath vs Rajawali)
+  function switchTab(tabId, clickedBtn) {
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => {
+      content.classList.remove('active-content');
+    });
+
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    document.getElementById(tabId).classList.add('active-content');
+    clickedBtn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

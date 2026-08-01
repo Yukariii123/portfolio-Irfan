@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Irfan — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- CSS KHAS UNTUK BAHAGIAN HOME (EXPERTISES & SOFTWARES) -->
+<style>
+  /* --- BAHAGIAN FEATURED BUILDS / EXPERTISES --- */
+  #featured-builds {
+    --fb-bg: #0b0f14;
+    --fb-panel: #11161d;
+    --fb-line: #212a35;
+    --fb-cyan: #00ffcc;
+    --fb-violet: #8b7bff;
+    --fb-text: #dfe6ec;
+    --fb-mute: #7c8894;
+    background: var(--fb-bg);
+    border-radius: 20px;
+    padding: 3rem clamp(1.25rem, 4vw, 3rem);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    margin-bottom: 4rem;
+  }
+
+  #featured-builds::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,204,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,204,0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #featured-builds .fb-head {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  #featured-builds .fb-eyebrow {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    color: var(--fb-cyan);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #featured-builds .fb-eyebrow::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--fb-cyan);
+    box-shadow: 0 0 0 0 rgba(0,255,204,0.6);
+    animation: fb-pulse 2.2s ease-out infinite;
+  }
+
+  @keyframes fb-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(0,255,204,0.55); }
+    70%  { box-shadow: 0 0 0 9px rgba(0,255,204,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,255,204,0); }
+  }
+
+  #featured-builds h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: var(--fb-text);
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    margin: 0.35rem 0 0;
+  }
+
+  #featured-builds .fb-sub {
+    position: relative;
+    z-index: 1;
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--fb-mute);
+    max-width: 65ch;
+    margin: -1.25rem 0 2.5rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  /* Grid dilaraskan untuk 7 item */
+  .fb-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .fb-card {
+    position: relative;
+    background: var(--fb-panel);
+    border: 1px solid var(--fb-line);
+    border-radius: 14px;
+    padding: 1.6rem 1.4rem 1.5rem;
+    text-decoration: none;
+    display: block;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .fb-card:hover,
+  .fb-card:focus-visible {
+    transform: translateY(-6px);
+    border-color: var(--fb-cyan);
+    background: #141b23;
+    box-shadow: 0 10px 20px rgba(0,255,204,0.1);
+    outline: none;
+  }
+
+  .fb-card::before,
+  .fb-card::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--fb-violet);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .fb-card::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+  .fb-card::after  { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+  .fb-card:hover::before,
+  .fb-card:hover::after,
+  .fb-card:focus-visible::before,
+  .fb-card:focus-visible::after { opacity: 1; }
+
+  .fb-tag {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--fb-cyan);
+    border: 1px solid rgba(0,255,204,0.35);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    display: inline-block;
+  }
+
+  .fb-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--fb-text);
+    font-size: 1.05rem;
+    margin: 0.9rem 0 0.4rem;
+  }
+
+  .fb-card p {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--fb-mute);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 1.1rem;
+  }
+
+  .fb-link {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--fb-violet);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .fb-card:hover .fb-link,
+  .fb-card:focus-visible .fb-link { color: var(--fb-cyan); }
+
+  .fb-link .fb-arrow { transition: transform 0.25s ease; }
+  .fb-card:hover .fb-arrow,
+  .fb-card:focus-visible .fb-arrow { transform: translateX(4px); }
+
+  /* --- BAHAGIAN SOFTWARES --- */
+  .section-head {
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+  .section-head .eyebrow {
+    color: #00ffcc;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+  .section-head h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .skills-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-panel {
+    background: #11161d;
+    border: 1px solid #212a35;
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: all 0.3s ease;
+  }
+
+  .skill-panel:hover {
+    border-color: #00ffcc;
+    box-shadow: 0 8px 25px rgba(0, 255, 204, 0.05);
+    transform: translateY(-5px);
+  }
+
+  .skill-panel h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #212a35;
+    padding-bottom: 0.8rem;
+  }
+
+  .skill-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    font-family: 'Rajdhani', sans-serif;
+    color: #b0b0c0;
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .skill-name {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  /* SAIZ LOGO LAMA (BAGI YANG BERFUNGSI) */
+  .skill-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* KELAS BARU UNTUK LOGO APP KOTAK (CSS 100%, TAKKAN PECAH) */
+  .app-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    background: rgba(0, 255, 204, 0.1);
+    color: #00ffcc;
+    border: 1px solid rgba(0, 255, 204, 0.4);
+    flex-shrink: 0;
+  }
+
+  .skill-row .tag {
+    font-size: 0.75rem;
+    background: rgba(0, 255, 204, 0.1);
+    color: #00ffcc;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #featured-builds .fb-eyebrow::before { animation: none; }
+    .fb-card, .fb-link .fb-arrow, .skill-panel { transition: none; }
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Astralia<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About me</a></li>
+      <li><a href="achievements.html">Achievements</a></li>
+      <li class="nav-item">
+        <a href="artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="artwork-design.html">Artwork</a>
+          <a href="artwork-3d-modelling.html">Modelling</a>
+          <a href="artwork-games-development.html">Games</a>
+          <a href="artwork-ui.html">UI Reimagined</a>
+          <a href="artwork-video-creation.html">Video Creation</a>
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <span class="hero-tag"> Seeking Internship Opportunities </span>
+  <h1>Hi, I'm <span class="accent"> MUHAMMAD IRFAN BIN BAHRUDDIN </span>  </h1>
+  <p>Game Designer & Emerging Digital Artist | Passionate about game development and creative media production.</p>
+  <div class="cta-row">
+    <a href="artwork-design.html" class="btn btn-primary">View Portfolio →</a>
+    <a href="contact.html" class="btn btn-outline">Contact Me</a>
+  </div>
+</section>
+
+<!-- BAHAGIAN MY EXPERTISES -->
+<section class="section" id="featured-builds">
+  <div class="fb-head">
+    <div>
+      <span class="fb-eyebrow">Status: Available for internship</span>
+      <h2>My Expertises</h2>
+    </div>
+  </div>
+  <p class="fb-sub">Here is an overview of the technical and creative skills I have acquired during my academic journey.</p>
+
+  <div class="fb-grid">
+    
+    <!-- Kepakaran 1 -->
+    <a class="fb-card" href="artwork-games-development.html">
+      <span class="fb-tag">Development</span>
+      <h3>Game Development</h3>
+      <p>Prototaip, mekanik, dan projek permainan interaktif yang dibangunkan menggunakan perisian terkini.</p>
+      <span class="fb-link">Lihat portfolio <span class="fb-arrow">→</span></span>
+    </a>
+
+    <!-- Kepakaran 2 -->
+    <a class="fb-card" href="artwork-design.html">
+      <span class="fb-tag">Visual Art</span>
+      <h3>Concept &amp; Digital Art</h3>
+      <p>Lakaran konsep watak, ilustrasi digital, penciptaan aset 2D, dan pixel art.</p>
+      <span class="fb-link">Lihat portfolio <span class="fb-arrow">→</span></span>
+    </a>
+
+    <!-- Kepakaran 3 -->
+    <a class="fb-card" href="artwork-video-creation.html">
+      <span class="fb-tag">Production</span>
+      <h3>Storyboarding &amp; Video</h3>
+      <p>Dokumen pra-produksi, lakaran papan cerita (storyboard), penulisan skrip, dan suntingan video.</p>
+      <span class="fb-link">Lihat portfolio <span class="fb-arrow">→</span></span>
+    </a>
+
+    <!-- Kepakaran 4 -->
+    <a class="fb-card" href="artwork-ui.html">
+      <span class="fb-tag">Interface</span>
+      <h3>UI / UX Design</h3>
+      <p>Reka bentuk dan susun atur antaramuka pengguna (HUD) untuk aplikasi mudah alih dan permainan digital.</p>
+      <span class="fb-link">Lihat portfolio <span class="fb-arrow">→</span></span>
+    </a>
+
+    <!-- Kepakaran 5 -->
+    <a class="fb-card" href="digital-posters.html">
+      <span class="fb-tag">Graphic</span>
+      <h3>Graphic Design</h3>
+      <p>Pengurusan elemen visual, rekaan poster promosi, tipografi, dan bahan cetakan fizikal.</p>
+      <span class="fb-link">Lihat portfolio <span class="fb-arrow">→</span></span>
+    </a>
+
+    <!-- Kepakaran 6 -->
+    <a class="fb-card" href="digital-animation.html">
+      <span class="fb-tag">Motion</span>
+      <h3>2D Animation</h3>
+      <p>Penghasilan animasi 2D, pergerakan sprite karakter (gerak, serang), dan kesan visual pergerakan (VFX).</p>
+      <span class="fb-link">Lihat portfolio <span class="fb-arrow">→</span></span>
+    </a>
+
+    <!-- Kepakaran 7 -->
+    <a class="fb-card" href="artwork-3d-modelling.html">
+      <span class="fb-tag">3D Art</span>
+      <h3>3D Modelling</h3>
+      <p>Pemodelan objek 3D, penyusunan tahap (level design), dan rekaan persekitaran (environment).</p>
+      <span class="fb-link">Lihat portfolio <span class="fb-arrow">→</span></span>
+    </a>
+
+  </div>
+</section>
+
+<!-- BAHAGIAN SOFTWARES -->
+<section class="section" id="tools">
+  <div class="section-head">
+    <span class="eyebrow">Technical Skills</span>
+    <h2>Softwares</h2>
+  </div>
+  
+  <div class="skills-cols">
+    
+    <!-- Perisian 1: Game Development -->
+    <div class="skill-panel">
+      <h3>Game Development</h3>
+      <div class="skill-list">
+        <div class="skill-row">
+          <div class="skill-name">
+            <!-- Logo Unity (Ini berjaya keluar, kita kekalkan) -->
+            <img src="https://cdn.simpleicons.org/unity/00ffcc" class="skill-icon" alt="Unity">
+            Unity
+          </div>
+          <span class="tag">Engine</span>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">
+            <!-- GUNA LOGO KOTAK CSS (TAKKAN PECAH) -->
+            <div class="app-logo">VS</div>
+            Microsoft Visual Studio
+          </div>
+          <span class="tag">Code</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perisian 2: 2D and Graphic Design -->
+    <div class="skill-panel">
+      <h3>2D & Graphic Design</h3>
+      <div class="skill-list">
+        <div class="skill-row">
+          <div class="skill-name">
+            <!-- GUNA LOGO KOTAK CSS (TAKKAN PECAH) -->
+            <div class="app-logo">Ps</div>
+            Adobe Photoshop
+          </div>
+          <span class="tag">Editing</span>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">
+            <!-- GUNA LOGO KOTAK CSS (TAKKAN PECAH) -->
+            <div class="app-logo">Ai</div>
+            Adobe Illustrator
+          </div>
+          <span class="tag">Vector</span>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">
+            <!-- Ikon SVG khas untuk Piskel (Ini berjaya keluar, kita kekalkan) -->
+            <svg class="skill-icon" viewBox="0 0 24 24" fill="#00ffcc" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10v4h4v10h-4v6H7v-6H3V6h4V2zm2 4v2H5v6h2v4h10v-4h2V8h-4V6H9z"/></svg>
+            Piskel
+          </div>
+          <span class="tag">Pixel Art</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perisian 3: 3D Modelling -->
+    <div class="skill-panel">
+      <h3>3D Modelling</h3>
+      <div class="skill-list">
+        <div class="skill-row">
+          <div class="skill-name">
+            <!-- Logo Blender (Ini berjaya keluar, kita kekalkan) -->
+            <img src="https://cdn.simpleicons.org/blender/00ffcc" class="skill-icon" alt="Blender">
+            Blender
+          </div>
+          <span class="tag">3D Tool</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perisian 4: Video Creation -->
+    <div class="skill-panel">
+      <h3>Video Creation</h3>
+      <div class="skill-list">
+        <div class="skill-row">
+          <div class="skill-name">
+            <!-- GUNA LOGO KOTAK CSS (TAKKAN PECAH) -->
+            <div class="app-logo">Ae</div>
+            Adobe After Effects
+          </div>
+          <span class="tag">VFX</span>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">
+            <!-- GUNA LOGO KOTAK CSS (TAKKAN PECAH) -->
+            <div class="app-logo">CC</div>
+            CapCut
+          </div>
+          <span class="tag">Editing</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <div class="socials">
+      <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+      <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>
+      <a href="[Pautan ArtStation]" aria-label="ArtStation" target="_blank" rel="noopener">AS</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

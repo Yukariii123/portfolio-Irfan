@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blender 3D — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+
+<!-- CSS KHAS UNTUK PAGE BLENDER -->
+<style>
+  /* --- REKA BENTUK HERO --- */
+  .page-hero {
+    max-width: 1000px;
+    margin: 6rem auto 3rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .page-hero .eyebrow {
+    color: #00ffcc;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+  }
+
+  .page-hero p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    color: #b0b0c0;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* --- REKA BENTUK SECTION TITLE --- */
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: #00ffcc;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+  }
+
+  /* --- VIDEO SHOWCASE --- */
+  .video-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+  }
+
+  .video-wrapper {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
+    border: 2px solid rgba(0, 255, 204, 0.4);
+  }
+
+  .video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* --- GALERI GAMBAR RENDER 3D --- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9; /* Sesuai untuk hasil render 3D */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+    cursor: pointer; /* Tukar kursor ke tangan bila hover */
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.03);
+    border-color: #00ffcc;
+    z-index: 5;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+  }
+  
+  .gallery-item:hover img {
+    filter: brightness(1.2);
+  }
+
+  /* --- BUTANG KEMBALI --- */
+  .back-nav { text-align: center; margin-bottom: 5rem; }
+  .back-btn { display: inline-block; padding: 12px 28px; border: 1px solid #00ffcc; color: #00ffcc; text-decoration: none; border-radius: 8px; font-family: 'Orbitron', sans-serif; font-size: 1rem; transition: 0.3s; background: rgba(0, 255, 204, 0.05); text-transform: uppercase; }
+  .back-btn:hover { background: #00ffcc; color: #000; box-shadow: 0 0 20px rgba(0, 255, 204, 0.4); font-weight: 700; }
+
+  /* --- MODAL POPUP (LIGHTBOX) --- */
+  .modal {
+    display: none; 
+    position: fixed;
+    z-index: 999;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal.show {
+    display: block;
+    opacity: 1;
+  }
+
+  .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(0, 255, 204, 0.2);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    object-fit: contain;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #00ffcc;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  .modal-content {
+    animation-name: zoom;
+    animation-duration: 0.4s;
+  }
+
+  @keyframes zoom {
+    from {transform:scale(0.8); opacity:0}
+    to {transform:scale(1); opacity:1}
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo">IPANG INC BUDAK PENYUUU<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/about.html">About me</a></li>
+      <li><a href="/achievements.html">Achievements</a></li>
+      <li class="nav-item">
+        <a href="/artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="/artwork-design.html">Artwork</a>
+          <a href="/artwork-3d-modelling.html" class="active">Modelling</a>
+          <a href="/artwork-games-development.html">Games</a>
+          <a href="/artwork-ui.html">UI Reimagined</a>
+          <a href="/artwork-video-creation.html">Video Creation</a>
+        </div>
+      </li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+<div class="page-hero">
+  <span class="eyebrow">Modelling / Blender</span>
+  <h1>Blender 3D</h1>
+  <p>Showcases and renders of 3D models created in Blender, including custom PC builds, character models, and smartphone.</p>
+</div>
+
+<!-- KOTAK MODAL UNTUK POPUP GAMBAR -->
+<div id="imageModal" class="modal">
+  <span class="close" id="closeModal">&times;</span>
+  <img class="modal-content" id="popupImage" alt="Popup Render">
+</div>
+
+<section class="section">
+  <!-- BAHAGIAN VIDEO -->
+  <h3 class="section-title">✦ 3D Animation & Showreel ✦</h3>
+  <div class="video-showcase">
+    <div class="video-wrapper">
+      <!-- DIBETULKAN: Tukar youtu.be kepada format embed yang betul -->
+      <iframe src="https://www.youtube.com/embed/Yx9O7hQbGuY" title="Blender Work 1" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- BAHAGIAN GAMBAR RENDER -->
+  <h3 class="section-title">✦ Render Gallery ✦</h3>
+  <div class="gallery-grid">
+    <!-- Tambah class 'clickable-image' pada semua imej -->
+    <div class="gallery-item"><img src="/image/Modelling/BlenderModelling/pics/character 1.png" alt="3D Render 1" class="clickable-image"></div>
+    <div class="gallery-item"><img src="/image/Modelling/BlenderModelling/pics/character 2.png" alt="3D Render 2" class="clickable-image"></div>
+    <div class="gallery-item"><img src="/image/Modelling/BlenderModelling/pics/pc model 1.png" alt="3D Render 3" class="clickable-image"></div>
+    <div class="gallery-item"><img src="/image/Modelling/BlenderModelling/pics/pc model 2.png" alt="3D Render 4" class="clickable-image"></div>
+    <div class="gallery-item"><img src="/image/Modelling/BlenderModelling/pics/pc model 3.png" alt="3D Render 5" class="clickable-image"></div>
+    <div class="gallery-item"><img src="/image/Modelling/BlenderModelling/pics/pc model4.png" alt="3D Render 6" class="clickable-image"></div>
+    <div class="gallery-item"><img src="/image/Modelling/BlenderModelling/pics/smartphone 1.png" alt="3D Render 7" class="clickable-image"></div>
+    <div class="gallery-item"><img src="/image/Modelling/BlenderModelling/pics/smartphone 2.png" alt="3D Render 8" class="clickable-image"></div>
+  </div>
+
+  <div class="back-nav">
+    <a href="/artwork-3d-modelling.html" class="back-btn">← Kembali Ke Kategori Modelling</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  // Script untuk Modal Popup Gambar
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("popupImage");
+  const closeBtn = document.getElementById("closeModal");
+  
+  // Dapatkan semua gambar yang mempunyai class 'clickable-image'
+  const images = document.querySelectorAll(".clickable-image");
+
+  images.forEach(img => {
+    img.addEventListener("click", function(){
+      modal.classList.add("show");
+      modalImg.src = this.src; // Masukkan sumber gambar yang ditekan ke dalam popup
+    });
+  });
+
+  // Fungsi tutup popup bila tekan butang X
+  closeBtn.addEventListener("click", function() {
+    modal.classList.remove("show");
+  });
+
+  // Fungsi tutup popup bila tekan kawasan luar gambar
+  window.addEventListener("click", function(event) {
+    if (event.target == modal) {
+      modal.classList.remove("show");
+    }
+  });
+</script>
+
+</body>
+</html>

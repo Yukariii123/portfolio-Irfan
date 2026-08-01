@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artwork — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+
+<!-- CSS KHAS UNTUK GALERI ARTWORK, TABS & POPUP MODAL -->
+<style>
+  /* --- REKA BENTUK HERO --- */
+  .page-hero {
+    max-width: 1000px;
+    margin: 6rem auto 3rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .page-hero .eyebrow {
+    color: #00ffcc;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    color: #b0b0c0;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+
+  /* --- REKA BENTUK BUTANG TABS --- */
+  .tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    padding: 12px 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+  }
+
+  .tab-btn:hover, .tab-btn.active {
+    background: #00ffcc;
+    color: #0a0a0f;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+    font-weight: 700;
+  }
+
+  /* --- KAWALAN SECTION (SEMBUNYI & MUNCUL) --- */
+  .tab-content {
+    display: none; 
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  .tab-content.active-content {
+    display: block; 
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- REKA BENTUK KAD KATEGORI (DIGITAL ARTWORK) --- */
+  .port-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+  }
+
+  .port-card {
+    position: relative !important;
+    display: block !important; 
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    background: #14141e !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    aspect-ratio: 4 / 3 !important; /* Bentuk 4:3 paling seimbang */
+    cursor: pointer !important;
+    text-decoration: none !important; 
+    transition: all 0.4s ease !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .port-card:hover {
+    transform: translateY(-8px) !important;
+    border-color: #00ffcc !important;
+    box-shadow: 0 15px 30px rgba(0, 255, 204, 0.2) !important;
+  }
+
+  /* GAMBAR */
+  .ph-img {
+    position: absolute !important;
+    top: 0 !important; 
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; 
+    object-position: center top !important;
+    display: block !important;
+    transition: transform 0.5s ease, filter 0.5s ease !important;
+    filter: brightness(0.8) !important; 
+    z-index: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .port-card:hover .ph-img {
+    transform: scale(1.08) !important;
+    filter: brightness(0.4) !important; 
+  }
+
+  /* TAG FOLDER (Diikat kuat supaya tak terjejas oleh style.css) */
+  .port-tagcat {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    left: auto !important; /* Paksa supaya tak memanjang ke kiri */
+    bottom: auto !important;
+    width: fit-content !important; /* Ngam-ngam ikut teks */
+    max-width: none !important;
+    min-width: 0 !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: #00ffcc !important;
+    border: 1px solid #00ffcc !important;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    z-index: 10 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    line-height: 1 !important;
+    display: inline-block !important;
+    margin: 0 !important;
+  }
+
+  /* TEKS OVERLAY DI BAWAH (Sentiasa tunjuk supaya tak pening) */
+  .port-overlay {
+    position: absolute !important;
+    top: auto !important; /* Halang bayang hitam naik ke atas */
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 50% !important; /* Paksa gradient hitam separuh kad di bawah */
+    padding: 20px !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.7) 70%, transparent 100%) !important;
+    z-index: 5 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+
+  .port-overlay h4 {
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 1.4rem !important;
+    color: #ffffff !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+    text-align: left !important;
+    line-height: 1.2 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .port-overlay p {
+    font-family: 'Rajdhani', sans-serif !important;
+    color: #00ffcc !important;
+    font-size: 1rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+    text-align: left !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  /* --- REKA BENTUK GALERI GAMBAR SAHAJA (PHYSICAL ARTWORK) --- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+  }
+
+  .gallery-item {
+    position: relative !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    aspect-ratio: 4 / 3 !important; 
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
+    transition: transform 0.3s ease, border-color 0.3s ease !important;
+    background: #000 !important;
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.03) !important;
+    border-color: #00ffcc !important;
+    z-index: 5 !important;
+  }
+
+  .gallery-item img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: filter 0.3s ease !important;
+    cursor: pointer; /* Tukar bentuk mouse kepada jari bila boleh ditekan */
+  }
+  
+  .gallery-item:hover img {
+    filter: brightness(1.1) !important;
+  }
+
+  /* --- MODAL POPUP (LIGHTBOX) --- */
+  .modal {
+    display: none; 
+    position: fixed;
+    z-index: 999;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal.show {
+    display: block;
+    opacity: 1;
+  }
+
+  .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(0, 255, 204, 0.2);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    object-fit: contain;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #00ffcc;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  .modal-content {
+    animation-name: zoom;
+    animation-duration: 0.4s;
+  }
+
+  @keyframes zoom {
+    from {transform:scale(0.8); opacity:0}
+    to {transform:scale(1); opacity:1}
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo">IPANG INC BUDAK PENYUUU<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/about.html">About me</a></li>
+      <li><a href="/achievements.html">Achievements</a></li>
+      <li class="nav-item">
+        <a href="/artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="/artwork-design.html" class="active">Artwork</a>
+          <a href="/artwork-3d-modelling.html">Modelling</a>
+          <a href="/artwork-games-development.html">Games</a>
+          <a href="/artwork-ui.html">UI Reimagined</a>
+          <a href="/artwork-video-creation.html">Video Creation</a>
+        </div>
+      </li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+
+<div class="page-hero">
+  <span class="eyebrow">Portfolio / Artwork</span>
+  <h1>Artwork Collection</h1>
+  <p>Pilih kategori di bawah untuk melihat karya seni digital ataupun karya tradisional fizikal saya.</p>
+</div>
+
+<!-- BUTANG KAWALAN TABS -->
+<div class="tab-container">
+  <button class="tab-btn active" onclick="switchTab('digital', this)">Digital Artwork</button>
+  <button class="tab-btn" onclick="switchTab('physical', this)">Physical Artwork</button>
+</div>
+
+<!-- KOTAK MODAL UNTUK POPUP GAMBAR -->
+<div id="imageModal" class="modal">
+  <span class="close" id="closeModal">&times;</span>
+  <img class="modal-content" id="popupImage" alt="Popup Artwork">
+</div>
+
+<section class="section">
+  
+  <!-- BAHAGIAN 1: DIGITAL ARTWORK (Aktif Secara Default) -->
+  <div id="digital" class="tab-content active-content">
+    <div class="port-grid">
+      
+      <a href="artwork/digital-artworks.html" class="port-card">
+        <span class="port-tagcat">Folder</span>
+        <img src="/image/Artwork/DigitalArtwork/artworks/expression combined.png" alt="Artworks" class="ph-img">
+        <div class="port-overlay">
+          <h4>Artworks</h4>
+          <p>Lukisan digital & concept art</p>
+        </div>
+      </a>
+      
+      <a href="artwork/digital-assets.html" class="port-card">
+        <span class="port-tagcat">Folder</span>
+        <img src="/image/Artwork/DigitalArtwork/assets creation/building prototype.png" alt="Assets Creation" class="ph-img">
+        <div class="port-overlay">
+          <h4>Assets Creation</h4>
+          <p>Aset 2D & elemen UI</p>
+        </div>
+      </a>
+      
+      <a href="artwork/digital-posters.html" class="port-card">
+        <span class="port-tagcat">Folder</span>
+        <img src="/image/Artwork/DigitalArtwork/Posters/NEW POSTER AW 2.png" alt="Posters" class="ph-img">
+        <div class="port-overlay">
+          <h4>Posters</h4>
+          <p>Reka bentuk poster promosi</p>
+        </div>
+      </a>
+    
+
+    </div>
+  </div>
+
+  <!-- BAHAGIAN 2: PHYSICAL ARTWORK (Tersembunyi Secara Default) -->
+  <div id="physical" class="tab-content">
+    
+    <!-- TAJUK & DESKRIPSI UNTUK PHYSICAL ARTWORK -->
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem; padding: 0 2rem;">
+      <h3 style="font-family: 'Orbitron', sans-serif; font-size: 2rem; color: #fff; margin-bottom: 1rem;">Physical Artwork</h3>
+      <p style="font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; color: #b0b0c0; line-height: 1.6;">A collection of physical work, ranging from traditional drawings and paintings to custom merchandise, standees, and physical game mockups.</p>
+    </div>
+
+    <div class="gallery-grid">
+      
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/artworks 1.jpg" alt="Artwork 1" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/artworks 2.jpg" alt="Artwork 2" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/Stande1.jpg" alt="Standee 1" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/Stande2.jpg" alt="Standee 2" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/Stande3.jpg" alt="Standee 3" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/Bookmark.jpg" alt="Bookmarks" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/brochure 2.jpg" alt="Brochure" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/canvas 1.jpg" alt="Canvas" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/canvas 2.jpg" alt="Canvas" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/canvas 3.jpg" alt="Canvas" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/canvas 4.jpg" alt="Canvas" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/canvas 5.jpg" alt="Canvas" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/canvas 6.jpg" alt="Canvas" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/2.jpeg" alt="Craft" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/3.jpeg" alt="Craft" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/4.jpeg" alt="Craft" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/5.jpeg" alt="Craft" class="clickable-image"></div>
+      <div class="gallery-item"><img src="/image/Artwork/PhysicalArtworks/6.jpeg" alt="Craft" class="clickable-image"></div>
+
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <div class="socials">
+      <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+      <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>
+      <a href="[Pautan ArtStation]" aria-label="ArtStation" target="_blank" rel="noopener">AS</a>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPT UNTUK MENU DAN TABS -->
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+      }
+    });
+  });
+
+  function switchTab(tabId, clickedBtn) {
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => {
+      content.classList.remove('active-content');
+    });
+
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    document.getElementById(tabId).classList.add('active-content');
+    clickedBtn.classList.add('active');
+  }
+
+  // Script untuk Modal Popup Gambar
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("popupImage");
+  const closeBtn = document.getElementById("closeModal");
+  
+  // Dapatkan semua gambar yang mempunyai class 'clickable-image'
+  const images = document.querySelectorAll(".clickable-image");
+
+  images.forEach(img => {
+    img.addEventListener("click", function(){
+      modal.classList.add("show");
+      modalImg.src = this.src; // Masukkan sumber gambar yang ditekan ke dalam popup
+    });
+  });
+
+  // Fungsi tutup popup bila tekan butang X
+  closeBtn.addEventListener("click", function() {
+    modal.classList.remove("show");
+  });
+
+  // Fungsi tutup popup bila tekan kawasan luar gambar
+  window.addEventListener("click", function(event) {
+    if (event.target == modal) {
+      modal.classList.remove("show");
+    }
+  });
+</script>
+
+</body>
+</html>

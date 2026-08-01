@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achievements — Muhammad Irfan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+  /* --- REKA BENTUK HERO --- */
+  .page-hero {
+    max-width: 1000px;
+    margin: 6rem auto 3rem;
+    padding: 0 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .page-hero .eyebrow {
+    color: #00ffcc;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 25px rgba(0, 255, 204, 0.3);
+  }
+
+  .page-hero p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    color: #b0b0c0;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* --- KEPALA SEKSYEN (SECTION HEADER) --- */
+  .timeline-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 5rem 0 3rem;
+  }
+
+  .timeline-title::before,
+  .timeline-title::after {
+    content: '';
+    height: 1px;
+    width: 100px;
+    background: linear-gradient(to right, transparent, #00ffcc);
+  }
+  .timeline-title::after {
+    background: linear-gradient(to left, transparent, #00ffcc);
+  }
+
+  .timeline-title h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+    margin: 0;
+  }
+
+  /* --- CYBER TIMELINE CONTAINER --- */
+  .timeline-container {
+    max-width: 900px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+    position: relative;
+  }
+
+  /* Garisan Utama (Laser Line) */
+  .timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 48px; /* Tepat di tengah ikon */
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, #00ffcc 10%, #00ffcc 90%, transparent);
+    box-shadow: 0 0 15px #00ffcc;
+    z-index: 0;
+  }
+
+  /* --- TIMELINE ITEM (Nod & Kad) --- */
+  .ach-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    padding-left: 90px;
+    z-index: 1;
+  }
+
+  /* --- NOD IKON (TIMELINE NODE) --- */
+  .ach-node {
+    position: absolute;
+    left: 25px; /* Selaraskan dengan garisan */
+    width: 48px;
+    height: 48px;
+    background: #0a0a0f;
+    border: 2px solid #00ffcc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .ach-item:hover .ach-node {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px #00ffcc, inset 0 0 10px #00ffcc;
+  }
+
+  .ach-node svg {
+    width: 22px;
+    height: 22px;
+    stroke: #00ffcc;
+    fill: none;
+    transition: all 0.4s ease;
+  }
+
+  /* --- REKA BENTUK KAD PENCAPAIAN --- */
+  .ach-card {
+    background: linear-gradient(145deg, #11161d, #0b0f14);
+    border: 1px solid #212a35;
+    border-radius: 12px;
+    padding: 2rem;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  /* Latar belakang grid halus (Cyber Grid) */
+  .ach-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0,255,204,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,255,204,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Bucu (HUD Brackets) */
+  .ach-card::after {
+    content: "";
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 15px; height: 15px;
+    border-top: 2px solid #00ffcc;
+    border-right: 2px solid #00ffcc;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .ach-item:hover .ach-card {
+    transform: translateY(-5px);
+    border-color: #00ffcc;
+    box-shadow: 0 15px 40px rgba(0, 255, 204, 0.15);
+  }
+
+  .ach-item:hover .ach-card::after {
+    opacity: 1;
+  }
+
+  /* --- KANDUNGAN DALAM KAD --- */
+  .ach-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ach-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .ach-year {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+
+  .ach-badge {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    background: rgba(0, 255, 204, 0.1);
+    color: #00ffcc;
+    border: 1px solid rgba(0, 255, 204, 0.4);
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+  }
+
+  .ach-card h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .ach-card p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.15rem;
+    color: #a0a0b5;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* --- TEMA KHAS: EMAS (GOLD) --- */
+  .gold-theme .ach-node { border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
+  .gold-theme:hover .ach-node { box-shadow: 0 0 25px #ffd700, inset 0 0 10px #ffd700; }
+  .gold-theme .ach-node svg { stroke: #ffd700; }
+  .gold-theme:hover .ach-card { border-color: #ffd700; box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15); }
+  .gold-theme .ach-badge { background: rgba(255, 215, 0, 0.1); color: #ffd700; border-color: rgba(255, 215, 0, 0.5); }
+  .gold-theme .ach-card::after { border-color: #ffd700; }
+  .gold-theme .ach-year { color: #ffd700; }
+
+  /* --- TEMA KHAS: PERAK (SILVER) --- */
+  .silver-theme .ach-node { border-color: #c0c0c0; box-shadow: 0 0 15px rgba(192, 192, 192, 0.6); }
+  .silver-theme:hover .ach-node { box-shadow: 0 0 25px #c0c0c0, inset 0 0 10px #c0c0c0; }
+  .silver-theme .ach-node svg { stroke: #c0c0c0; }
+  .silver-theme:hover .ach-card { border-color: #c0c0c0; box-shadow: 0 15px 40px rgba(192, 192, 192, 0.15); }
+  .silver-theme .ach-badge { background: rgba(192, 192, 192, 0.1); color: #c0c0c0; border-color: rgba(192, 192, 192, 0.5); }
+  .silver-theme .ach-card::after { border-color: #c0c0c0; }
+  .silver-theme .ach-year { color: #c0c0c0; }
+
+  /* --- TEMA KHAS: KEPIMPINAN (LEADERSHIP) --- */
+  .leader-theme .ach-node { border-color: #8b7bff; box-shadow: 0 0 15px rgba(139, 123, 255, 0.6); }
+  .leader-theme:hover .ach-node { box-shadow: 0 0 25px #8b7bff, inset 0 0 10px #8b7bff; }
+  .leader-theme .ach-node svg { stroke: #8b7bff; }
+  .leader-theme:hover .ach-card { border-color: #8b7bff; box-shadow: 0 15px 40px rgba(139, 123, 255, 0.15); }
+  .leader-theme .ach-badge { background: rgba(139, 123, 255, 0.1); color: #b8afff; border-color: rgba(139, 123, 255, 0.5); }
+  .leader-theme .ach-card::after { border-color: #8b7bff; }
+  .leader-theme .timeline-title::before, .leader-theme .timeline-title::after { background: linear-gradient(to right, transparent, #8b7bff); }
+  .leader-theme .timeline-title::after { background: linear-gradient(to left, transparent, #8b7bff); }
+  .leader-theme .timeline-title h2 { text-shadow: 0 0 15px rgba(139, 123, 255, 0.5); }
+
+  /* Garisan Ungu untuk sekyen Leadership sahaja */
+  .leader-container::before {
+    background: linear-gradient(to bottom, transparent, #8b7bff 10%, #8b7bff 90%, transparent);
+    box-shadow: 0 0 15px #8b7bff;
+  }
+
+  /* RESPONSIVE UNTUK PHONE */
+  @media (max-width: 768px) {
+    .timeline-container::before, .leader-container::before { left: 33px; }
+    .ach-node { left: 10px; }
+    .ach-item { padding-left: 70px; }
+    .page-hero h1 { font-size: 2.5rem; }
+  }
+  @media (max-width: 480px) {
+    .ach-item { flex-direction: column; padding-left: 0; align-items: flex-start; margin-bottom: 4rem; }
+    .ach-node { position: relative; left: 0; margin-bottom: -24px; margin-left: 20px; z-index: 5; background: #14141e; }
+    .timeline-container::before, .leader-container::before { display: none; }
+    .ach-meta { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">IPANG INC BUDAK PENYUUU<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About me</a></li>
+      <li><a href="achievements.html" class="active">Achievements</a></li>
+      <li class="nav-item">
+        <a href="artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="artwork-design.html">Artwork</a>
+          <a href="artwork-3d-modelling.html">Modelling</a>
+          <a href="artwork-games-development.html">Games</a>
+          <a href="artwork-ui.html">UI Reimagined</a>
+          <a href="artwork-video-creation.html">Video Creation</a>
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+
+<div class="page-hero">
+  <span class="eyebrow">Achievements</span>
+  <h1>Milestones &amp; Recognitions</h1>
+  <p>Here are some of the highlights of my work over the years, including awards, project recognitions, participations, and certifications.</p>
+</div>
+
+<section class="section">
+  
+  <!-- KATEGORI: AWARDS & RECOGNITIONS -->
+  <div class="timeline-title">
+    <h2>Awards &amp; Recognitions</h2>
+  </div>
+  
+  <div class="timeline-container">
+
+    <!-- Pencapaian 1: UI Award (Default Cyan Theme) -->
+    <div class="ach-item">
+      <div class="ach-node">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="6"/>
+          <path d="m15.5 12.5-1 8.5-2.5-2-2.5 2-1-8.5"/>
+        </svg>
+      </div>
+      <div class="ach-card">
+        <div class="ach-content">
+          <div class="ach-meta">
+            <span class="ach-year">2026</span>
+            <span class="ach-badge">Award</span>
+          </div>
+          <h4>Best Game User Interface Award</h4>
+          <p>Astralis War — Vivo Voce 2026 Final Year Project Exhibition</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pencapaian 2: Dean's List (Default Cyan Theme) -->
+    <div class="ach-item">
+      <div class="ach-node">
+        <svg viewBox="0 0 24 24">
+          <path d="M8 21h8"/><path d="M12 17v4"/>
+          <path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/>
+          <path d="M5 4H3v2a4 4 0 0 0 4 4"/>
+          <path d="M19 4h2v2a4 4 0 0 1-4 4"/>
+        </svg>
+      </div>
+      <div class="ach-card">
+        <div class="ach-content">
+          <div class="ach-meta">
+            <span class="ach-year">2023 - 2026</span>
+            <span class="ach-badge">Academic</span>
+          </div>
+          <h4>Dean’s List Awards (Semester 1 – 5)</h4>
+          <p>Bachelor of Design (Digital Games) with Honours, UPSI</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pencapaian 3: GOLD AWARD (Tema Emas) -->
+    <div class="ach-item gold-theme">
+      <div class="ach-node">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="6"/>
+          <path d="m15.5 12.5-1 8.5-2.5-2-2.5 2-1-8.5"/>
+        </svg>
+      </div>
+      <div class="ach-card">
+        <div class="ach-content">
+          <div class="ach-meta">
+            <span class="ach-year">2022</span>
+            <span class="ach-badge">Gold Award</span>
+          </div>
+          <h4>Attack on CyberCity</h4>
+          <p>DICE 2022 Final Year Project Exhibition</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pencapaian 4: SILVER AWARD (Tema Perak) -->
+    <div class="ach-item silver-theme">
+      <div class="ach-node">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="6"/>
+          <path d="m15.5 12.5-1 8.5-2.5-2-2.5 2-1-8.5"/>
+        </svg>
+      </div>
+      <div class="ach-card">
+        <div class="ach-content">
+          <div class="ach-meta">
+            <span class="ach-year">2022</span>
+            <span class="ach-badge">Silver Award</span>
+          </div>
+          <h4>HITel Teaching &amp; Learning Innovation</h4>
+          <p>Silver Award Recognition for educational project contribution.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pencapaian 5: Dean's List Diploma (Default Cyan Theme) -->
+    <div class="ach-item">
+      <div class="ach-node">
+        <svg viewBox="0 0 24 24">
+          <path d="M8 21h8"/><path d="M12 17v4"/>
+          <path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/>
+          <path d="M5 4H3v2a4 4 0 0 0 4 4"/>
+          <path d="M19 4h2v2a4 4 0 0 1-4 4"/>
+        </svg>
+      </div>
+      <div class="ach-card">
+        <div class="ach-content">
+          <div class="ach-meta">
+            <span class="ach-year">2020 - 2022</span>
+            <span class="ach-badge">Academic</span>
+          </div>
+          <h4>Dean’s List Awards (Semester 1, 2, 3, &amp; 5)</h4>
+          <p>Diploma in Game Design and Development, UPSI</p>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End Timeline Container 1 -->
+
+  <!-- KATEGORI: LEADERSHIP & EVENT ROLES -->
+  <div class="leader-theme">
+    <div class="timeline-title">
+      <h2>Leadership Roles</h2>
+    </div>
+    
+    <div class="timeline-container leader-container">
+      
+      <!-- Leadership 1 -->
+      <div class="ach-item leader-theme">
+        <div class="ach-node">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <div class="ach-card">
+          <div class="ach-content">
+            <div class="ach-meta">
+              <span class="ach-year">2026</span>
+              <span class="ach-badge">Leadership</span>
+            </div>
+            <h4>Deputy Secretary</h4>
+            <p>Vivo Voce 2026 Final Year Project Exhibition</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leadership 2 -->
+      <div class="ach-item leader-theme">
+        <div class="ach-node">
+          <svg viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <div class="ach-card">
+          <div class="ach-content">
+            <div class="ach-meta">
+              <span class="ach-year">2022</span>
+              <span class="ach-badge">Committee</span>
+            </div>
+            <h4>Publicity and Media Committee</h4>
+            <p>DICE 2022 Final Year Project Exhibition</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <div class="socials">
+      <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+      <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>
+      <a href="[Pautan ArtStation]" aria-label="ArtStation" target="_blank" rel="noopener">AS</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-item > a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modelling — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+
+<!-- CSS KHAS UNTUK FOLDER -->
+<style>
+  .page-hero {
+    max-width: 1000px;
+    margin: 6rem auto 3rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+  .page-hero .eyebrow {
+    color: #00ffcc;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .page-hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+  .page-hero p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    color: #b0b0c0;
+    max-width: 700px;
+    margin: 0 auto 4rem;
+  }
+
+  .port-grid {
+    display: grid;
+    /* Kita besarkan sikit saiz folder sebab ada 2 je */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+  }
+
+  .port-card {
+    position: relative !important;
+    display: block !important; 
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    background: #14141e !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    aspect-ratio: 16 / 9 !important;
+    cursor: pointer !important;
+    text-decoration: none !important; 
+    transition: all 0.4s ease !important;
+  }
+
+  .port-card:hover {
+    transform: translateY(-8px) !important;
+    border-color: #00ffcc !important;
+    box-shadow: 0 15px 30px rgba(0, 255, 204, 0.2) !important;
+  }
+
+  .ph-img {
+    position: absolute !important;
+    top: 0 !important; left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.5s ease, filter 0.5s ease !important;
+    z-index: 1 !important;
+  }
+
+  .port-card:hover .ph-img {
+    transform: scale(1.08) !important;
+    filter: brightness(0.3) !important;
+  }
+
+  .port-tagcat {
+    position: absolute !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+    color: #00ffcc !important;
+    border: 1px solid #00ffcc !important;
+    padding: 0.3rem 0.8rem !important;
+    border-radius: 20px !important;
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    z-index: 3 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    display: inline-block !important;
+    width: auto !important; 
+    height: auto !important;
+  }
+
+  .port-overlay {
+    position: absolute !important;
+    bottom: -100px !important;
+    left: 0 !important;
+    width: 100% !important;
+    padding: 3rem 1.5rem 1.5rem !important;
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.6) 60%, transparent 100%) !important;
+    z-index: 2 !important;
+    transition: bottom 0.4s ease, opacity 0.4s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    box-sizing: border-box !important;
+  }
+
+  .port-card:hover .port-overlay {
+    bottom: 0 !important;
+  }
+
+  .port-overlay h4 {
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 1.8rem !important;
+    color: #ffffff !important;
+    margin-bottom: 0.5rem !important;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8) !important;
+    display: block !important;
+  }
+
+  .port-overlay p {
+    font-family: 'Rajdhani', sans-serif !important;
+    color: #b0b0c0 !important;
+    font-size: 1.1rem !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    display: block !important;
+  }
+</style>
+</head>
+<body style="background-color: #0a0a0f; color: #fff;">
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo">IPANG INC BUDAK PENYUUU<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/about.html">About me</a></li>
+      <li><a href="/achievements.html">Achievements</a></li>
+      <li class="nav-item">
+        <a href="/artwork.html">Portfolio</a>
+        <div class="dropdown">
+          <a href="/artwork-design.html">Artwork</a>
+          <a href="/artwork-3d-modelling.html" class="active">Modelling</a>
+          <a href="/artwork-games-development.html">Games</a>
+          <a href="/artwork-ui.html">UI Reimagined</a>
+          <a href="/artwork-video-creation.html">Video Creation</a>
+        </div>
+      </li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+
+<div class="page-hero">
+  <span class="eyebrow">Portfolio / Modelling</span>
+  <h1>3D Modelling</h1>
+  <p>Pilih folder perisian di bawah untuk melihat koleksi hasil pemodelan 3D dan rekaan persekitaran saya.</p>
+</div>
+
+<section class="section">
+  <div class="port-grid">
+    
+    <!-- FOLDER BLENDER (Akan pergi ke fail modelling-blender.html bila ditekan) -->
+    <a href="modelling/modelling-blender.html" class="port-card">
+      <span class="port-tagcat">Folder</span>
+      <!-- Letak gambar cover folder Blender kat sini -->
+      <img src="/image/Modelling/BlenderModelling/pics/character 1.png" alt="Blender Project" class="ph-img">
+      <div class="port-overlay">
+        <h4>Blender 3D</h4>
+        <p>Koleksi pemodelan objek 3D, rendering watak, dan aset prop.</p>
+      </div>
+    </a>
+    
+
+    
+    <!-- FOLDER UNITY (Akan pergi ke fail modelling-unity.html bila ditekan) -->
+    <a href="modelling/modelling-unity.html" class="port-card">
+      <span class="port-tagcat">Folder</span>
+      <!-- Letak gambar cover folder Unity kat sini -->
+      <img src="/image/Modelling/UnityModelling/unity1.png" alt="Unity Project" class="ph-img">
+      <div class="port-overlay">
+        <h4>Unity Engine</h4>
+        <p>Rekaan susun atur tahap permainan (level design) dan persekitaran (environment).</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+</script>
+
+</body>
+</html>
