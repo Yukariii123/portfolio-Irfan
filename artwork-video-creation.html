@@ -6,7 +6,7 @@
 <title>Video Creation — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="style.css">
 
 <!-- CSS KHAS UNTUK GALERI VIDEO & DOKUMEN -->
 <style>
@@ -218,6 +218,7 @@
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
     border: 2px solid rgba(0, 255, 204, 0.4);
+    background: #000;
   }
 
   .video-wrapper iframe {
@@ -233,28 +234,75 @@
     margin-top: 0.6rem;
     font-size: 0.95rem;
   }
+
+  /* --- FALLBACK: VIDEO YANG TAK BOLEH DI-EMBED (Content ID claim, dll) ---
+       Guna ni gantikan <iframe> untuk video yang bagi "Video unavailable" masa embed. --- */
+  .video-wrapper.no-embed {
+    display: block;
+    text-decoration: none;
+  }
+
+  .video-wrapper.no-embed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .video-wrapper.no-embed .play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    transition: background 0.3s ease;
+  }
+
+  .video-wrapper.no-embed:hover .play-overlay {
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .video-wrapper.no-embed .play-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 14px 28px;
+    background: #00ffcc;
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+    transition: transform 0.3s ease;
+  }
+
+  .video-wrapper.no-embed:hover .play-btn {
+    transform: scale(1.05);
+  }
 </style>
 </head>
 <body style="background-color: #0a0a0f; color: #fff;">
 
 <header class="navbar">
   <div class="nav-inner">
-    <a href="/index.html" class="logo"><span>.</span></a>
+    <a href="index.html" class="logo">Astralia<span>.</span></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="/index.html">Home</a></li>
-      <li><a href="/about.html">About me</a></li>
-      <li><a href="/achievements.html">Achievements</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About me</a></li>
+      <li><a href="achievements.html">Achievements</a></li>
       <li class="nav-item">
-        <a href="/artwork.html">Portfolio</a>
+        <a href="artwork.html">Portfolio</a>
         <div class="dropdown">
-          <a href="/artwork-design.html">Artwork</a>
-          <a href="/artwork-3d-modelling.html">Modelling</a>
-          <a href="/artwork-games-development.html">Games</a>
-          <a href="/artwork-ui.html">UI Reimagined</a>
-          <a href="/artwork-video-creation.html" class="active">Video Creation</a>
+          <a href="artwork-design.html">Artwork</a>
+          <a href="artwork-3d-modelling.html">Modelling</a>
+          <a href="artwork-games-development.html">Games</a>
+          <a href="artwork-ui.html">UI Reimagined</a>
+          <a href="artwork-video-creation.html" class="active">Video Creation</a>
         </div>
       </li>
-      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
   </div>
@@ -283,9 +331,9 @@
     <div class="port-grid">
       
       <!-- ITEM 1: Animatics Presentation -->
-      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/Animatics%20Presentation.pdf" target="_blank" class="port-card">
+      <a href="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/Animatics%20Presentation.pdf" target="_blank" class="port-card">
         <span class="port-tagcat">Slide</span>
-        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/animatics-presentation.jpg" alt="Animatics Presentation" class="ph-img">
+        <img src="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/animatics-presentation.jpg" alt="Animatics Presentation" class="ph-img">
         <div class="port-overlay">
           <h4>Animatics Presentation: Attack on Cybercity</h4>
           <p>Slaid pembentangan projek animatik.</p>
@@ -293,9 +341,9 @@
       </a>
 
       <!-- ITEM 2: Final Storyboard Attack on Cybercity -->
-      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/Final%20Storyboard%20Attack%20on%20CyberCity.pdf" target="_blank" class="port-card">
+      <a href="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/Final%20Storyboard%20Attack%20on%20CyberCity.pdf" target="_blank" class="port-card">
         <span class="port-tagcat">PDF</span>
-        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/final-storyboard-cybercity.jpg" alt="Final Storyboard" class="ph-img">
+        <img src="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/final-storyboard-cybercity.jpg" alt="Final Storyboard" class="ph-img">
         <div class="port-overlay">
           <h4>Final Storyboard: Attack on Cybercity</h4>
           <p>Lakaran bingkai papan cerita akhir.</p>
@@ -303,9 +351,9 @@
       </a>
 
       <!-- ITEM 3: Script Video Kenangan -->
-      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/SCRIPT%20VIDEO.pdf" target="_blank" class="port-card">
+      <a href="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/SCRIPT%20VIDEO.pdf" target="_blank" class="port-card">
         <span class="port-tagcat">PDF</span>
-        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/script-video.jpg" alt="Script Video" class="ph-img">
+        <img src="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/script-video.jpg" alt="Script Video" class="ph-img">
         <div class="port-overlay">
           <h4>Script Video: Filem Pendek "Kenangan"</h4>
           <p>Draf penulisan skrip penuh filem pendek.</p>
@@ -313,9 +361,9 @@
       </a>
 
       <!-- ITEM 4: Storyboard Kenangan -->
-      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/Storyboard%20Kenangan.pdf" target="_blank" class="port-card">
+      <a href="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/Storyboard%20Kenangan.pdf" target="_blank" class="port-card">
         <span class="port-tagcat">Slide</span>
-        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/storyboard-kenangan.jpg" alt="Storyboard Kenangan" class="ph-img">
+        <img src="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/storyboard-kenangan.jpg" alt="Storyboard Kenangan" class="ph-img">
         <div class="port-overlay">
           <h4>Storyboard: "Kenangan"</h4>
           <p>Pembentangan Narrative & Storytelling.</p>
@@ -323,9 +371,9 @@
       </a>
 
       <!-- ITEM 5: UI Elements in Education -->
-      <a href="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/UI%20Elements%20in%20Education%20Video%20Proposal.pdf" target="_blank" class="port-card">
+      <a href="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/UI%20Elements%20in%20Education%20Video%20Proposal.pdf" target="_blank" class="port-card">
         <span class="port-tagcat">Slide</span>
-        <img src="/image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/ui-elements.jpg" alt="UI Elements" class="ph-img">
+        <img src="image/Video%20Creation/Scriptwriting%20and%20Storyboarding/thumbnails/ui-elements.jpg" alt="UI Elements" class="ph-img">
         <div class="port-overlay">
           <h4>UI Elements in Education</h4>
           <p>Kajian/Pembentangan elemen antaramuka.</p>
@@ -343,15 +391,17 @@
 
     <div class="video-showcase">
 
-      <a href="https://www.youtube.com/watch?v=yOm7EI5skDo" target="_blank" rel="noopener" class="video-wrapper no-embed">
-      <img src="https://img.youtube.com/vi/yOm7EI5skDo/maxresdefault.jpg" alt="Astralis War Gameplay">
-      <div class="play-overlay">
-        <span class="play-btn">
-          ▶ Watch on YouTube
-        </span>
+      <!-- Video 1: Kenangan — video ni kena Content ID claim / tak boleh di-embed,
+           jadi guna thumbnail + butang "Watch on YouTube" sebagai ganti iframe. -->
+      <div>
+        <a href="https://www.youtube.com/watch?v=yOm7EI5skDo" target="_blank" rel="noopener" class="video-wrapper no-embed">
+          <img src="https://img.youtube.com/vi/yOm7EI5skDo/maxresdefault.jpg" alt="Kenangan">
+          <div class="play-overlay">
+            <span class="play-btn">▶ Watch on YouTube</span>
+          </div>
+        </a>
+        <p class="video-caption">Kenangan</p>
       </div>
-    </a>
-  </div>
 
       <!-- Video 2: UI Elements in Education -->
       <div>
