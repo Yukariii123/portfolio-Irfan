@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
@@ -314,6 +314,32 @@
     animation-duration: 0.4s;
   }
 
+  .back-nav {
+    text-align: center;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+
+  .back-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    text-decoration: none;
+    border-radius: 999px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    background: rgba(0, 255, 204, 0.05);
+  }
+
+  .back-btn:hover {
+    background: #00ffcc;
+    color: #0a0a0f;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.35);
+  }
+
   @keyframes zoom {
     from {transform:scale(0.8); opacity:0}
     to {transform:scale(1); opacity:1}
@@ -332,11 +358,12 @@
       <li class="nav-item">
         <a href="artwork.html">Portfolio</a>
         <div class="dropdown">
-          <a href="artwork-design.html" class="active">Artwork</a>
-          <a href="artwork-3d-modelling.html">Modelling</a>
-          <a href="artwork-games-development.html">Games</a>
-          <a href="artwork-ui.html">UI Reimagined</a>
-          <a href="artwork-video-creation.html">Video Creation</a>
+          <a href="artwork-design.html" class="active">Artworks</a>
+          <a href="artwork-3d-modelling.html">3D Modelling</a>
+          <a href="artwork-games-development.html">Game Development</a>
+          <a href="artwork-ui.html">UI / UX</a>
+          <a href="artwork-video-creation.html">Video Production</a>
+          <a href="artwork-animation.html">Animation</a>
         </div>
       </li>
       <li><a href="contact.html">Contact</a></li>
@@ -347,9 +374,9 @@
 
 
 <div class="page-hero">
-  <span class="eyebrow">Portfolio / Artwork</span>
-  <h1>Artwork Collection</h1>
-  <p>Pilih kategori di bawah untuk melihat karya seni digital ataupun karya tradisional fizikal saya.</p>
+  <span class="eyebrow">Portfolio / Artworks</span>
+  <h1>Artworks</h1>
+  <p>Select a category below to preview my work.</p>
 </div>
 
 <!-- BUTANG KAWALAN TABS -->
@@ -375,7 +402,7 @@
         <img src="image/Artwork/DigitalArtwork/artworks/expression combined.png" alt="Artworks" class="ph-img">
         <div class="port-overlay">
           <h4>Artworks</h4>
-          <p>Lukisan digital & concept art</p>
+          <p>Concept arts, digital illustrations & spritesheets</p>
         </div>
       </a>
       
@@ -384,7 +411,7 @@
         <img src="image/Artwork/DigitalArtwork/assets creation/building prototype.png" alt="Assets Creation" class="ph-img">
         <div class="port-overlay">
           <h4>Assets Creation</h4>
-          <p>Aset 2D & elemen UI</p>
+          <p>2D Assets & Animated Game Sprites</p>
         </div>
       </a>
       
@@ -392,12 +419,16 @@
         <span class="port-tagcat">Folder</span>
         <img src="image/Artwork/DigitalArtwork/Posters/NEW POSTER AW 2.png" alt="Posters" class="ph-img">
         <div class="port-overlay">
-          <h4>Posters</h4>
-          <p>Reka bentuk poster promosi</p>
+          <h4>Graphic Design</h4>
+          <p>Game Posters, Infographics & Typography</p>
         </div>
       </a>
     
 
+    </div>
+
+    <div class="back-nav">
+      <a href="artwork.html" class="back-btn">← BACK TO PORTFOLIO</a>
     </div>
   </div>
 
@@ -432,13 +463,17 @@
       <div class="gallery-item"><img src="image/Artwork/PhysicalArtworks/6.jpeg" alt="Craft" class="clickable-image"></div>
 
     </div>
+
+    <div class="back-nav">
+      <a href="artwork.html" class="back-btn">← BACK TO PORTFOLIO</a>
+    </div>
   </div>
 
 </section>
 
 <footer>
   <div class="footer-inner">
-    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <span class="copy">© 2026 Muhammad Irfan. All Rights Reserved.</span>
     <div class="socials">
       <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
       <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>

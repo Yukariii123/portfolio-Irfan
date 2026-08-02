@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Games — Portfolio</title>
+<title>Game Development — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -145,6 +145,32 @@
     margin: 0;
     line-height: 1.5;
   }
+
+  .back-nav {
+    text-align: center;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+
+  .back-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    text-decoration: none;
+    border-radius: 999px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    background: rgba(0, 255, 204, 0.05);
+  }
+
+  .back-btn:hover {
+    background: #00ffcc;
+    color: #0a0a0f;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.35);
+  }
 </style>
 </head>
 <body style="background-color: #0a0a0f; color: #fff;">
@@ -159,11 +185,12 @@
       <li class="nav-item">
         <a href="artwork.html">Portfolio</a>
         <div class="dropdown">
-          <a href="artwork-design.html">Artwork</a>
-          <a href="artwork-3d-modelling.html">Modelling</a>
-          <a href="artwork-games-development.html" class="active">Games</a>
-          <a href="artwork-ui.html">UI Reimagined</a>
-          <a href="artwork-video-creation.html">Video Creation</a>
+          <a href="artwork-design.html">Artworks</a>
+          <a href="artwork-3d-modelling.html">3D Modelling</a>
+          <a href="artwork-games-development.html" class="active">Game Development</a>
+          <a href="artwork-ui.html">UI / UX</a>
+          <a href="artwork-video-creation.html">Video Production</a>
+          <a href="../artwork-animation.html">Animation</a>
           <!-- Boleh tambah Animation jika nak kekalkan -->
         </div>
       </li>
@@ -175,9 +202,9 @@
 
 
 <div class="page-hero">
-  <span class="eyebrow">Portfolio / Games</span>
-  <h1>Games Development</h1>
-  <p>Koleksi projek Level Design, mekanik permainan, dan pembangunan game menggunakan Unity &amp; C#.</p>
+  <span class="eyebrow">Portfolio / Game Development</span>
+  <h1>Game Development</h1>
+  <p>Select a project below to preview my work.</p>
 </div>
 
 <section class="section">
@@ -185,70 +212,74 @@
     
     <!-- KAD PROJEK 1: Astralis War -->
     <a href="game/astralis-war.html" class="port-card game">
-      <span class="port-tagcat">Strategy / Sci-Fi</span>
+      <span class="port-tagcat">2.5D Action / Shooter</span>
       <img src="image/Games/AstralisWar/1.png" alt="Astralis War" class="ph-img">
       <div class="port-overlay">
         <h4>Astralis War</h4>
-        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+        <p></p>
       </div>
     </a>
     
     <!-- KAD PROJEK 2: Attack On Cyber City -->
     <a href="game/attack-on-cyber-city.html" class="port-card game">
-      <span class="port-tagcat">Action / Cyberpunk</span>
+      <span class="port-tagcat">2D Action / Shooter</span>
       <img src="image/Games/AttackOnCyberCity/1.png" alt="Attack On Cyber City" class="ph-img">
       <div class="port-overlay">
-        <h4>Attack On Cyber City</h4>
-        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+        <h4>Attack on CyberCity</h4>
+        <p></p>
       </div>
     </a>
     
     <!-- KAD PROJEK 3: Cheesy Escape -->
     <a href="game/cheesy-escape.html" class="port-card game">
-      <span class="port-tagcat">Puzzle / Platformer</span>
+      <span class="port-tagcat"> 3D Action / Puzzle / Casual</span>
       <img src="image/Games/CheesyEscape/1.png" alt="Cheesy Escape" class="ph-img">
       <div class="port-overlay">
         <h4>Cheesy Escape</h4>
-        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+        <p></p>
       </div>
     </a>
     
     <!-- KAD PROJEK 4: Learn Your Food -->
     <a href="game/learn-your-food.html" class="port-card game">
-      <span class="port-tagcat">Educational / Casual</span>
+      <span class="port-tagcat"> AR / Educational</span>
       <img src="image/Games/LearnYourFood/1.png" alt="Learn Your Food" class="ph-img">
       <div class="port-overlay">
         <h4>Learn Your Food</h4>
-        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+        <p></p>
       </div>
     </a>
 
     <!-- KAD PROJEK 5: Legend Of The Mines -->
     <a href="game/legend-of-the-mines.html" class="port-card game">
-      <span class="port-tagcat">Adventure / RPG</span>
+      <span class="port-tagcat"> 2D Educational / Casual</span>
       <img src="image/Games/LegendOfTheMines/1.jpg" alt="Legend Of The Mines" class="ph-img">
       <div class="port-overlay">
-        <h4>Legend Of The Mines</h4>
-        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+        <h4>Legend of the Mines</h4>
+        <p></p>
       </div>
     </a>
 
     <!-- KAD PROJEK 6: Space Crusader -->
     <a href="game/space-crusader.html" class="port-card game">
-      <span class="port-tagcat">Arcade / Shooter</span>
+      <span class="port-tagcat"> 3D Action / Shooter</span>
       <img src="image/Games/SpaceCrusader/1.png" alt="Space Crusader" class="ph-img">
       <div class="port-overlay">
         <h4>Space Crusader</h4>
-        <p>[Penerangan ringkas mekanik game dan sumbangan anda dalam projek ini.]</p>
+        <p></p>
       </div>
     </a>
 
   </div>
 </section>
 
+<div class="back-nav">
+  <a href="artwork.html" class="back-btn">← BACK TO PORTFOLIO</a>
+</div>
+
 <footer>
   <div class="footer-inner">
-    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <span class="copy">© 2026 Muhammad Irfan. All Rights Reserved.</span>
     <div class="socials">
       <a href="[Pautan LinkedIn]" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
       <a href="[Pautan GitHub]" aria-label="GitHub" target="_blank" rel="noopener">GH</a>

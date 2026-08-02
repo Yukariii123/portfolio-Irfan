@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
@@ -139,6 +139,32 @@
     line-height: 1.4 !important;
     display: block !important;
   }
+
+  .back-nav {
+    text-align: center;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+
+  .back-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    text-decoration: none;
+    border-radius: 999px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    background: rgba(0, 255, 204, 0.05);
+  }
+
+  .back-btn:hover {
+    background: #00ffcc;
+    color: #0a0a0f;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.35);
+  }
 </style>
 </head>
 <body style="background-color: #0a0a0f; color: #fff;">
@@ -153,11 +179,12 @@
       <li class="nav-item">
         <a href="artwork.html">Portfolio</a>
         <div class="dropdown">
-          <a href="artwork-design.html">Artwork</a>
-          <a href="artwork-3d-modelling.html" class="active">Modelling</a>
-          <a href="artwork-games-development.html">Games</a>
-          <a href="artwork-ui.html">UI Reimagined</a>
-          <a href="artwork-video-creation.html">Video Creation</a>
+          <a href="artwork-design.html">Artworks</a>
+          <a href="artwork-3d-modelling.html" class="active">3D Modelling</a>
+          <a href="artwork-games-development.html">Game Development</a>
+          <a href="artwork-ui.html">UI / UX</a>
+          <a href="artwork-video-creation.html">Video Production</a>
+          <a href="artwork-animation.html">Animation</a>
         </div>
       </li>
       <li><a href="contact.html">Contact</a></li>
@@ -168,9 +195,9 @@
 
 
 <div class="page-hero">
-  <span class="eyebrow">Portfolio / Modelling</span>
+  <span class="eyebrow">Portfolio / 3D Modelling</span>
   <h1>3D Modelling</h1>
-  <p>Pilih folder perisian di bawah untuk melihat koleksi hasil pemodelan 3D dan rekaan persekitaran saya.</p>
+  <p>Select a category below to preview my work.</p>
 </div>
 
 <section class="section">
@@ -182,8 +209,8 @@
       <!-- Letak gambar cover folder Blender kat sini -->
       <img src="image/Modelling/BlenderModelling/pics/character 1.png" alt="Blender Project" class="ph-img">
       <div class="port-overlay">
-        <h4>Blender 3D</h4>
-        <p>Koleksi pemodelan objek 3D, rendering watak, dan aset prop.</p>
+        <h4>Blender</h4>
+        <p>3D character & props modelling</p>
       </div>
     </a>
     
@@ -196,16 +223,20 @@
       <img src="image/Modelling/UnityModelling/unity1.png" alt="Unity Project" class="ph-img">
       <div class="port-overlay">
         <h4>Unity Engine</h4>
-        <p>Rekaan susun atur tahap permainan (level design) dan persekitaran (environment).</p>
+        <p>3D level design & overall game environment</p>
       </div>
     </a>
 
   </div>
 </section>
 
+<div class="back-nav">
+  <a href="artwork.html" class="back-btn">← BACK TO PORTFOLIO</a>
+</div>
+
 <footer>
   <div class="footer-inner">
-    <span class="copy">© 2026 Muhammad Irfan. Semua hak terpelihara.</span>
+    <span class="copy">© 2026 Muhammad Irfan. All Rights Reserved.</span>
   </div>
 </footer>
 
